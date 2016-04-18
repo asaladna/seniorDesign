@@ -5,7 +5,7 @@ from watchdog.events import PatternMatchingEventHandler
 import serial
 import struct
 
-# ser = serial.Serial('/dev/cu.usbmodem1411', 9600)
+ser = serial.Serial('/dev/cu.usbmodem1411', 9600)
 row = 0
 grid=[]
 grid.append([])
