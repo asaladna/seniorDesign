@@ -88,7 +88,7 @@ void loop() {
   pwm.setPWM(15, 0, movement[15]);
   
 
-  delay(5000);
+  delay(50);
   Serial.println("test");
  
 }
