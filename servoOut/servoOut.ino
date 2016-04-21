@@ -32,10 +32,17 @@ void setup() {
 
 void loop() {
    int counter = 0;
+
+  for(int x = 0; x < 16; x++)
+  {
+    msg[x] = 0;
+  }
    
    while (Serial.available()>0)
   { 
     msg[counter]=Serial.read();
+//      int word= Serial.read();
+      
     if(counter <= 3)
     {
       msg[counter] = ((msg[counter] - 9) * -1);
@@ -45,42 +52,31 @@ void loop() {
       msg[counter] = ((msg[counter] - 9) * -1);
     }
     movement[counter] = (msg[counter]*50 + 150);
+
+    
     counter++;
-  }
-  if(flag == true)
-    test = movement[counter];
-  Serial.print(test + "-");
-  flag = false;
+
   
-//  for(int x = 0; x < 16; x++)
-//  {
-//    if(x < 4)
-//    {
-//         movement[x]= ((movement[x] - 600) - 150)(-1);
-//    }else if(x < 12 && x > 7)
-//    {
-//      movement[x]= ((movement[x] - 600) - 150)(-1);
-//    }
-//}
-//  
-  Serial.println(movement[counter]);
-//  pwm.setPWM(0, 0, 200);
-//  pwm.setPWM(1, 0, 200);
-//  delay(500);
   pwm.setPWM(0, 0, movement[0]);
   pwm.setPWM(1, 0, movement[1]);
   pwm.setPWM(2, 0, movement[2]);
   pwm.setPWM(3, 0, movement[3]);
+
+//  delay(500);
   
   pwm.setPWM(4, 0, movement[4]);
   pwm.setPWM(5, 0, movement[5]);
   pwm.setPWM(6, 0, movement[6]);
   pwm.setPWM(7, 0, movement[7]);
+
+//  delay(500);
   
   pwm.setPWM(8, 0, movement[8]); 
   pwm.setPWM(9, 0, movement[9]);
   pwm.setPWM(10, 0, movement[10]);
   pwm.setPWM(11, 0, movement[11]);
+
+//  delay(500);
   
   pwm.setPWM(12, 0, movement[12]);
   pwm.setPWM(13, 0, movement[13]);
@@ -88,7 +84,7 @@ void loop() {
   pwm.setPWM(15, 0, movement[15]);
   
 
-  delay(50);
-  Serial.println("test");
+  
+  }
  
 }
