@@ -1,1 +1,10 @@
 
+Setting the directory path for GUI-> Pad
+
+1) Open up input.py
+2)    Go to line 45 (code show below)
+
+observer.schedule(event_handler, path='../tactile-pad/state/', recursive=False)
+
+3)change path='...' to your desired path
+4) when running the GUI upload the arduino code to the arduino and run the pyhton program in terminal (python input.py)
