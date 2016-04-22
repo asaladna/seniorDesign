@@ -16,7 +16,8 @@ uint8_t servonum = 0;
 void setup() {
   Serial.begin(9600);
       while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB port only
+    ; 
+    // wait for serial port to connect. Needed for native USB port only
   }
   
 
@@ -40,9 +41,10 @@ void loop() {
    
    while (Serial.available()>0)
   { 
+    //reads from Python program to array
     msg[counter]=Serial.read();
-//      int word= Serial.read();
-      
+
+    //accounts for the flipped servos  
     if(counter <= 3)
     {
       msg[counter] = ((msg[counter] - 9) * -1);
@@ -56,7 +58,7 @@ void loop() {
     
     counter++;
 
-  
+  //actual pin commands odering them to move
   pwm.setPWM(0, 0, movement[0]);
   pwm.setPWM(1, 0, movement[1]);
   pwm.setPWM(2, 0, movement[2]);
