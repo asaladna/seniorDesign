@@ -6,6 +6,11 @@ import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
+
+#GUI -> Pad
+
+
+#serial port for aurduino (do not touch)
 ser = serial.Serial('/dev/cu.usbmodem1411', 9600)
 
 
@@ -14,14 +19,13 @@ class MyHandler(FileSystemEventHandler):
         grid=[]
         grid.append([])
 
+        #reads in GUI data
         input_file = open(event.src_path).read()
         grid =json.loads(input_file)
 
-
+        #sets the increment value to higher difference for the pin....    (4 +1)2 = 10
         for x in range(4):
             for y in range(4):
-                # grid[x][y] = bytes(chr((grid[x][y] + 1) * 2).encode())
-                # ser.write(grid[x][y])
                 grid[x][y] = (grid[x][y] + 1) * 2
 
 
@@ -29,7 +33,7 @@ class MyHandler(FileSystemEventHandler):
         print(grid[0][0])
         # ser.write([ord(grid[0][0])])
 
-
+        #array sends pin data
         ser.write(struct.pack('>BBBBBBBBBBBBBBBB',grid[0][0],grid[0][1],grid[0][2],grid[0][3],grid[1][0],grid[1][1],grid[1][2],grid[1][3],grid[2][0],grid[2][1],grid[2][2],grid[2][3],grid[3][0],grid[3][1],grid[3][2],grid[3][3]))
 
 
@@ -37,6 +41,7 @@ class MyHandler(FileSystemEventHandler):
 if __name__ == "__main__":
     event_handler = MyHandler()
     observer = Observer()
+    #path = 'path to folder where states are stored'
     observer.schedule(event_handler, path='../tactile-pad/state/', recursive=False)
     observer.start()
 
