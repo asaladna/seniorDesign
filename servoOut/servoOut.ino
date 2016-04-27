@@ -12,12 +12,14 @@ bool flag = true;
 int movement[16];
 int msg[16];
 uint8_t servonum = 0;
-
+int ledPin = 8;
 void setup() {
   Serial.begin(9600);
       while (!Serial) {
     ; 
     // wait for serial port to connect. Needed for native USB port only
+    pinMode(ledPin, OUTPUT);
+    
   }
   
 
@@ -32,6 +34,7 @@ void setup() {
 
 
 void loop() {
+  digitalWrite(ledPin, HIGH);
    int counter = 0;
 
   for(int x = 0; x < 16; x++)
