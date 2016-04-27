@@ -12,7 +12,7 @@ from watchdog.events import FileSystemEventHandler
 
 #serial port for aurduino (do not touch)
 ser = serial.Serial('/dev/cu.usbmodem1411', 9600)
-
+#
 
 class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
