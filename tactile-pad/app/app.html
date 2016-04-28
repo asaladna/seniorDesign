@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Tactile Interface</title>
+  <link rel="stylesheet" type="text/css" href="app.css">
+</head>
+
+<body>
+  <div id="sidebar"></div>
+  <div id="view"></div>
+  <div id="info-text"></div>
+  <div id="bottom-text">Use the 4 arrow keys, mouse, or trackpad.</div>
+
+  <!-- three.js stuff -->
+  <script type="text/javascript" src="lib/three.min.js"></script>
+  <script type="text/javascript" src="lib/OrbitControls.js"></script>
+  <script type="text/javascript" src="lib/Tween.js"></script>
+
+  <!-- grid dependencies -->
+  <script type="text/javascript" src="board/vg.js"></script>
+  <script type="text/javascript" src="board/scene.js"></script>
+  <script type="text/javascript" src="utils/tools.js"></script>
+  <script type="text/javascript" src="board/cell.js"></script>
+  <script type="text/javascript" src="board/mousecaster.js"></script>
+  <script type="text/javascript" src="board/signal.js"></script>
+  <script type="text/javascript" src="board/board.js"></script>
+  <script type="text/javascript" src="board/tile.js"></script>
+  <script type="text/javascript" src="board/grid.js"></script>
+
+  <!-- sidebar -->
+  <script src="sidebar.js"></script>
+
+  <!-- scene controllers -->
+  <script src="controllers/demo1.js"></script>
+  <script src="controllers/demo2.js"></script>
+  <script src="controllers/infotext.js"></script>
+
+  <script type="text/javascript">
+    window.addEventListener('load', function(evt) {
+
+      /////////////////////////////////////////////////////////////////////////
+      // For parsing state and rendering it.
+      /////////////////////////////////////////////////////////////////////////
+
+      var worker = new Worker("./utils/json-parse-worker.js");
+      var ipc = require("ipc");
+      var state = null;
+
+      ipc.on('NEW_STATE_FILE', (statejson) => {
+        worker.postMessage(statejson);
+      });
+
+      worker.onmessage = (s) => {
+        state = s.data;
+        var boundedRender = updateState.bind(this);
+        boundedRender(state);
+      };
+
+      function updateState(state) {
+        var pinMagnitude = 0;
+        for (var i = 0; i < 4; i++) {
+          for (var j = 0; j < 4; j++) {
+            pinMagnitude = state[i][j]*8;
+            if (cells[i][j].h !== pinMagnitude) {
+              cells[i][j].h = pinMagnitude;
+              board.removeTile(cells[i][j].tile);
+              board.addTile(grid.generateTile(cells[i][j], 0.97));
+            }
+            else if (cells[i][j].tile.selected) {
+              cells[i][j].tile.toggle();
+            }
+          }
+        }
+      }
+
+      /////////////////////////////////////////////////////////////////////////
+      // Making the scene:
+      /////////////////////////////////////////////////////////////////////////
+
+      var scene = new vg.Scene({
+        element: document.getElementById('view'),
+        cameraPosition: { x: 290, y: 130, z: -160 }
+      }, true);
+
+      var grid = new vg.HexGrid({
+        cellSize: 20
+      });
+
+      var cells = grid.generateSquareGrid(4);
+
+      var board = new vg.Board(grid);
+      board.generateTilemap({
+        cellscale: .97
+      });
+
+      scene.add(board.group);
+      scene.focusOn(board.group);
+
+      var mouse = new vg.MouseCaster(scene.container, scene.camera);
+
+      // Use the demo's to manipulate the computer GUI.
+      var demo1 = Object.create(demo1SceneController);
+      demo1.initialize(ipc, mouse);
+      var demo2 = Object.create(demo2SceneController);
+      demo2.initialize(ipc, mouse, scene, state);
+      var text = Object.create(infoTextController);
+      text.initialize();
+      update();
+
+      /////////////////////////////////////////////////////////////////////////
+      // Animation frames to render the three.js on loop:
+      /////////////////////////////////////////////////////////////////////////
+
+      function update() {
+        mouse.update();
+        scene.render();
+        requestAnimationFrame(update);
+      }
+    });
+  </script>
+</body>
+</html>

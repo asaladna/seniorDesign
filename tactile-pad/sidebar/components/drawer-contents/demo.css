@@ -1,0 +1,44 @@
+#demo-controls {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+button {
+  color: #BCBCBC;
+  border-radius: 1px;
+  background: none;
+  width: 40%;
+  height: 70%;
+  margin: 15px;
+  font-size: 12px;
+  font-family: "Andale Mono";
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 1px;
+  background: inherit;
+  border: none;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button:hover {
+  border: 1px solid #969696;
+  box-shadow: 0 0px 10px 0px rgba(240,240,240,.14);
+}
+
+button:active {
+  background: #798d8e;
+}
+
+.demo-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+  width: 100%;
+}
