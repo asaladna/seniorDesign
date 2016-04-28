@@ -91,7 +91,8 @@ export class SideBar extends React.Component {
          onClick={this._activate}
          canOpen={this.state.active === 3}
         >
-          <div className="drawer-row"> The third demo is currently under development. </div>
+          <div className="drawer-row"> The third demo is currently </div>
+          <div className="drawer-row"> under development. </div>
         </Drawer>
 
       </div>
