@@ -1,8 +1,8 @@
 {
   "name": "tactile-interface-react-electron",
   "author": "Nigel Gilbert",
-  "version": "1.0.3",
-  "description": "Desktop application with react and electron.",
+  "version": "1.0.4",
+  "description": "Desktop application with react, electron and three.js.",
   "main": "main.js",
   "babel": {
     "presets": [

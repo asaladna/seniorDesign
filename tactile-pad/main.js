@@ -1,4 +1,9 @@
-/* eslint no-path-concat: 0, func-names:0 */
+"use strict";
+
+// Main.js handles all the electron boilerplate that is necessary for an
+// an electron app. Crossplatform, and handles keybindings for window control
+// stuff like Chrome dev tools and refresh.
+
 var app = require('app');
 var BrowserWindow = require('browser-window');
 var Menu = require('menu');
@@ -21,7 +26,7 @@ app.on('ready', function() {
   mainWindow.loadUrl('file://' + __dirname + '/app/app.html');
   module.exports.window = mainWindow;
 
-  var watchState = require('./emitters/watchState');
+  var watchState = require('./watch');
   var demo = require('./demos/demo');
 
   mainWindow.on('closed', function() {
