@@ -42,7 +42,7 @@ if __name__ == "__main__":
     event_handler = MyHandler()
     observer = Observer()
     #path = 'path to folder where states are stored'
-    observer.schedule(event_handler, path='../tactile-pad/state/', recursive=False)
+    observer.schedule(event_handler, path='./tactile-pad/state/', recursive=False)
     observer.start()
 
     try:
