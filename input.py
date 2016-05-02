@@ -12,7 +12,7 @@ from watchdog.events import FileSystemEventHandler
 
 #serial port for aurduino (do not touch)
 ser = serial.Serial('/dev/cu.usbmodem1411', 9600)
-#
+
 
 class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
@@ -31,17 +31,16 @@ class MyHandler(FileSystemEventHandler):
 
 
         print(grid[0][0])
-        # ser.write([ord(grid[0][0])])
-
-        #array sends pin data
+        #pases values and specifies size to Arduino
         ser.write(struct.pack('>BBBBBBBBBBBBBBBB',grid[0][0],grid[0][1],grid[0][2],grid[0][3],grid[1][0],grid[1][1],grid[1][2],grid[1][3],grid[2][0],grid[2][1],grid[2][2],grid[2][3],grid[3][0],grid[3][1],grid[3][2],grid[3][3]))
 
 
 
 if __name__ == "__main__":
+    #main function
     event_handler = MyHandler()
     observer = Observer()
-    #path = 'path to folder where states are stored'
+    #specifies path
     observer.schedule(event_handler, path='./tactile-pad/state/', recursive=False)
     observer.start()
 
