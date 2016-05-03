@@ -1,3 +1,14 @@
+##### Running the program
+1) Open the seniorDesign folder
+2) Open the servoOut folder and click on servoOut.ino
+3) Upload the program to the board
+4) Go back to the root seniorDesign folder
+5) Drag and drop startup.sh onto the terminal window
+6) Hit enter and run ".../startup.sh"
+7) A Gui should be displayed
+
+
+
 ##### Setting the directory path for GUI-> Pad
 
 1) Open up input.py
