@@ -1,4 +1,4 @@
-[https://youtu.be/3Wc_f3bGgxU](Setup tutorial and demo.)
+[Setup tutorial and app demo!](https://youtu.be/3Wc_f3bGgxU)
 
 # Running the program
 1) Open the seniorDesign folder
@@ -25,8 +25,7 @@ observer.schedule(event_handler, path='../tactile-pad/state/', recursive=False)
 
 # Arduino Install Guide
 
-IDE download
-https://www.arduino.cc/en/Main/Software
+[Download the Arduino IDE here.](https://www.arduino.cc/en/Main/Software)
 
 to establish connection with arduino
 1)In the top menu got to Tools-> Port-> /dev/cu.usbmodem1411  (something similar to this)
@@ -34,5 +33,4 @@ NOTE: The bluetooth options are not the right options- If you cannot see the /de
        if that does not work text me
 
 2) to upload the program hit the upload button
-if you are still having issues look up this video and skip to 31:00 https://www.youtube.com/watch?v=kLd_JyvKV4Y
-                                                                    (ignore the serial port stuff though in the video)
+if you are still having issues look up [this video](https://www.youtube.com/watch?v=kLd_JyvKV4Y) and skip to 31:00  (ignore the serial port stuff though in the video).
