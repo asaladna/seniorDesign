@@ -1,6 +1,6 @@
-HOWTO youtube video: https://youtu.be/3Wc_f3bGgxU
+[https://youtu.be/3Wc_f3bGgxU](Setup tutorial and demo.)
 
-##### Running the program
+# Running the program
 1) Open the seniorDesign folder
 2) Open the servoOut folder and click on servoOut.ino
 3) Upload the program to the board
@@ -11,7 +11,7 @@ HOWTO youtube video: https://youtu.be/3Wc_f3bGgxU
 
 
 
-##### Setting the directory path for GUI-> Pad
+# Setting the directory path for GUI-> Pad
 
 1) Open up input.py
 2)    Go to line 45 (code show below)
@@ -23,7 +23,7 @@ observer.schedule(event_handler, path='../tactile-pad/state/', recursive=False)
 
 
 
-##### Arduino Install Guide
+# Arduino Install Guide
 
 IDE download
 https://www.arduino.cc/en/Main/Software
